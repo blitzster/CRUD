@@ -4,9 +4,9 @@ const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editData, setEditData] = useState({});
-  const [loading, setLoading] = useState(false); // For handling delete button state
+  const [loading, setLoading] = useState(false);
 
-  // Fetch products when the component mounts
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -26,9 +26,11 @@ const HomePage = () => {
 
   // Handle delete
   const handleDeleteClick = async (id) => {
-    if (loading) return;
-    setLoading(true);
-
+    if (!id) {
+      console.error("Invalid product ID");
+      return;
+    }
+  
     try {
       const response = await fetch(`http://localhost:5000/api/products/${id}`, {
         method: "DELETE",
@@ -36,20 +38,19 @@ const HomePage = () => {
           "Content-Type": "application/json",
         },
       });
-
+  
       const data = await response.json();
       if (data.success) {
+        setProducts(prevProducts => prevProducts.filter(product => product._id !== id));
         alert("Product deleted successfully!");
-        fetchProducts(); // Refresh products
       } else {
         alert("Failed to delete product.");
       }
     } catch (error) {
       console.error("Error deleting product:", error);
-    } finally {
-      setLoading(false);
     }
   };
+  
 
   const handleEditClick = (product) => {
     setEditData(product);
