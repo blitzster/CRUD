@@ -63,6 +63,37 @@ body {
     color: #f9f9f9;
 }
 
+/* Default styles */
+.product-card {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .product-name {
+    color: black;
+  }
+  
+  /* Dark Mode Styles */
+  .dark-mode {
+    background-color: #121212;
+    color: white;
+  }
+  
+  .dark-mode .product-card {
+    background-color: #1e1e1e;
+    color: white;
+  }
+  
+  .dark-mode .product-name {
+    color: white;
+  }
+  
+  .dark-mode-text {
+    color: white;
+  }
+  
+
 /* Create Page */
 .create-page {
     max-width: 500px;

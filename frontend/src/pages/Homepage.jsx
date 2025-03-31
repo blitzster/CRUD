@@ -5,11 +5,17 @@ const HomePage = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editData, setEditData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
 
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle('dark-mode', !darkMode);
+  };
 
   // Function to fetch products
   const fetchProducts = async () => {
@@ -90,17 +96,21 @@ const HomePage = () => {
   };
 
   return (
-    <div className="home-page">
+    <div className={`home-page ${darkMode ? "dark-mode" : ""}`}>
+
+
       <h1>Product List</h1>
       {products.length === 0 ? (
         <p>No products added yet.</p>
       ) : (
         <div className="product-list">
           {products.map((product) => (
-            <div key={product._id} className="product-card">
+            <div key={product._id} className={`product-card ${darkMode ? "dark-mode" : ""}`}>
               <img src={product.image} alt={product.name} />
-              <h2>{product.name}</h2>
-              <p>Price: ${product.price}</p>
+              <h2 className={`product-name ${darkMode ? "dark-mode-text" : ""}`}>
+                {product.name}
+              </h2>
+              <p className={`product-name ${darkMode ? "dark-mode-text" : ""}`}>Price: ${product.price}</p>
               <div className="button-group">
                 <button className="edit-button" onClick={() => handleEditClick(product)}>
                   Edit

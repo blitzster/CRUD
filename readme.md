@@ -71,3 +71,6 @@ npm start
 
   - **Delete Product:**  
   ![Delete Product](./assets/Delete.png)
+
+- **Dark Mode:**  
+  ![Dark Mode](./assets/dark_mode.png)
